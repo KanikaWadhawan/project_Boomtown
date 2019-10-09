@@ -20,7 +20,7 @@ module.exports = gql`
     imageurl: String
     itemowner: User!
     tags: [Tag]
-    created : Date!
+    created : String!
     borrower: User
 
   }
@@ -67,6 +67,9 @@ module.exports = gql`
   }
 
   type Mutation {
+    signup: Boolean
+    login: Boolean
+    logout: Boolean
     addItem(
       input: NewItemInput! ):Item
   }
