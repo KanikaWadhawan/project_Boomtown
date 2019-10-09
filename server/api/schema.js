@@ -19,7 +19,7 @@ module.exports = gql`
     title: String!
     imageurl: String
     itemowner: User!
-    tags: {Tags}
+    tags: {Tag}
     created : Date
     borrower: User
 
@@ -30,8 +30,8 @@ module.exports = gql`
     email: String!
     fullname: String!
     bio: String
-    items: [Items]
-    borrowed: [Items]
+    items: [Item]
+    borrowed: [Item]
   }
 
   type Tag {
@@ -56,7 +56,7 @@ module.exports = gql`
   input NewItemInput {
     title: String!
     description: String
-    tags: [AssignedTags]
+    tags: [AssignedTag]
   }
 
   type Query {
