@@ -68,7 +68,6 @@ module.exports = gql`
 
   type Mutation {
     addItem(
-      item: NewItemInput!
-    ):Item
+      input: NewItemInput! ):Item
   }
 `;
