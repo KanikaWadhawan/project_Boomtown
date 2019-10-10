@@ -22,16 +22,17 @@ const relationResolvers = {
         throw new ApolloError(e);
       }
 
-    //   // -------------------------------
     },
-    // borrowed() {
-    //   // @TODO: Replace this mock return statement with the correct items from Postgres
-    //   return []
-    //   // -------------------------------
-    // }
-    // -------------------------------
+    borrowed(parent, args,{pgResource}, info) {
+      try {
+        const items = pgResource.getBorrowedItemsForUser(parent.id);
+        console.log(items);
+        return items;
+      } catch (e) {
+        throw new ApolloError(e);
+      }  
+   }
   },
-
   Item: {
     /**
      *  @TODO: Advanced resolvers
@@ -44,31 +45,47 @@ const relationResolvers = {
      *
      */
     // @TODO: Uncomment these lines after you define the Item type with these fields
-    // async itemowner() {
-    //   // @TODO: Replace this mock return statement with the correct user from Postgres
-    //   return {
-    //     id: 29,
-    //     fullname: "Mock user",
-    //     email: "mock@user.com",
-    //     bio: "Mock user. Remove me."
-    //   }
-    //   // -------------------------------
-    // },
-    // async tags() {
-    //   // @TODO: Replace this mock return statement with the correct tags for the queried Item from Postgres
-    //   return []
-    //   // -------------------------------
-    // },
-    // async borrower() {
-    //   /**
-    //    * @TODO: Replace this mock return statement with the correct user from Postgres
-    //    * or null in the case where the item has not been borrowed.
-    //    */
-    //   return null
-    //   // -------------------------------
-    // }
-    // -------------------------------
-  },
+    async itemowner({itemowner}, args,{pgResource}, info) {
+      
+      try {
+        const items = pgResource.getUserById(itemowner);
+        
+        return items;
+      } catch (e) {
+        throw new ApolloError(e);
+      }  
+     
+    },
+    async tags(parent, args,{pgResource}, info) {
+   
+      try {
+        const tagsItems = pgResource.getTagsForItem(parent.id);
+       
+        return tagsItems;
+      } catch (e) {
+        throw new ApolloError(e);
+      }  
+   },
+   async borrower({borrower}, args,{pgResource}, info) {
+    
+     try {
+      if(borrower){
+        const borrowerUser = pgResource.getUserById(borrower);
+        return borrowerUser;
+       }
+       else{
+         return null;
+       }
+       
+     } catch (e) {
+       throw new ApolloError(e);
+     }  
+    }
+     
+  }
+ 
+  
+
 };
 
 module.exports =relationResolvers;
