@@ -59,12 +59,16 @@ module.exports = postgres => {
        *
        *  You'll need to complete the query first before attempting this exercise.
        */
-
+      try{
       const findUserQuery = {
-        text: "", // @TODO: Basic queries
+        text: `SELECT id, fullname, email, bio FROM users WHERE id=$1 `, // @TODO: Basic queries
         values: [id],
       };
-
+      const user = await postgres.query(findUserQuery);
+      return user.rows[0];
+      }catch(e){
+       throw 'User Not Found';
+     }
       /**
        *  Refactor the following code using the error handling logic described above.
        *  When you're done here, ensure all of the resource methods in this file
@@ -74,36 +78,21 @@ module.exports = postgres => {
        *  If the password is incorrect throw 'User or Password incorrect'
        */
 
-      const user = await postgres.query(findUserQuery);
-      return user;
+      
       // -------------------------------
     },
     async getItems(idToOmit) {
       const items = await postgres.query({
-        /**
-         *  @TODO:
-         *
-         *  idToOmit = ownerId
-         *
-         *  Get all Items. If the idToOmit parameter has a value,
-         *  the query should only return Items were the ownerid !== idToOmit
-         *
-         *  Hint: You'll need to use a conditional AND/WHERE clause
-         *  to your query text using string interpolation
-         */
-
-        text: ``,
-        values: idToOmit ? [idToOmit] : [],
+       
+        text: `SELECT * FROM items WHERE itemowner <> $1`,
+        values: idToOmit ? [idToOmit] : [''],
       });
       return items.rows;
     },
     async getItemsForUser(id) {
       const items = await postgres.query({
-        /**
-         *  @TODO:
-         *  Get all Items for user using their id
-         */
-        text: ``,
+       
+        text: `SELECT * FROM items WHERE itemowner = $1;`,
         values: [id],
       });
       return items.rows;
@@ -120,9 +109,14 @@ module.exports = postgres => {
       return items.rows;
     },
     async getTags() {
+      try{
+        const tags = await postgres.query("SELECT * FROM tags" );
+        return tags.rows;
+      }catch (e){
+        throw e
+      }
+
       
-      const tags = await postgres.query("SELECT * FROM tags" );
-      return tags.rows;
     },
     async getTagsForItem(id) {
       const tagsQuery = {

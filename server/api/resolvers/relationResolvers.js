@@ -13,11 +13,17 @@ const relationResolvers = {
      *
      */
     // @TODO: Uncomment these lines after you define the User type with these fields
-    // items() {
-    //   // @TODO: Replace this mock return statement with the correct items from Postgres
-    //   return []
+    items(parent, args, {pgResource}, info) {
+      
+      try {
+        const items = pgResource.getItemsForUser(parent.id);
+        return items;
+      } catch (e) {
+        throw new ApolloError(e);
+      }
+
     //   // -------------------------------
-    // },
+    },
     // borrowed() {
     //   // @TODO: Replace this mock return statement with the correct items from Postgres
     //   return []
@@ -64,3 +70,5 @@ const relationResolvers = {
     // -------------------------------
   },
 };
+
+module.exports =relationResolvers;
