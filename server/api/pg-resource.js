@@ -70,7 +70,6 @@ module.exports = postgres => {
       // -------------------------------
     },
     async getItems(idToOmit) {
-      console.log(1);
       const items = await postgres.query({
         text: `SELECT * FROM items WHERE itemowner <> $1`,
         values: idToOmit ? [idToOmit] : [""]
@@ -188,10 +187,6 @@ module.exports = postgres => {
                 done();
                 // Uncomment this resolve statement when you're ready!
                 resolve(res.rows[0]);
-
-                console.log(res.rows[0]);
-
-                // -------------------------------
               });
             });
           } catch (e) {
