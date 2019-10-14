@@ -183,6 +183,11 @@ Query Variables panel:
 ```
 
 - Resolvers
+  GraphQL is the best way to work with data from any back-end that your product needs. It is not a mapping of your database, but rather a graph of the data sources and shapes your product is made of. Resolvers are the key to this graph. Each resolver represents a single field, and can be used to fetch data from any source(s) you may have.
+
+  Resolvers provide the instructions for turning a GraphQL operation into data. Resolvers are organized into a one to one mapping to the fields in a GraphQL schema. This section describes resolvers' organization, every field's default resolver, and their signature.
+
+  In order to respond to queries, a schema needs to have resolve functions for all fields. This collection of functions is called the "resolver map". This map relates the schema fields and types to a function.
 
 ```
 const data = require('./data');
@@ -205,6 +210,9 @@ module.exports = resolvers;
 ```
 
 - Mutating Data
+  We can modify data on the server using a query. However, the common accepted convention is that every operation that includes writes should be sent using a mutation, hence the name of the keyword.
+
+  Despite that, mutations are really much like the query objects we have been writing so far. They too have a type, arguments and a resolve function.
 
 ```
 // back in ./api/schema.js...
