@@ -13,25 +13,23 @@ const relationResolvers = {
      *
      */
     // @TODO: Uncomment these lines after you define the User type with these fields
-    items(parent, args, {pgResource}, info) {
-      
+    items(parent, args, { pgResource }, info) {
       try {
         const items = pgResource.getItemsForUser(parent.id);
         return items;
       } catch (e) {
         throw new ApolloError(e);
       }
-
     },
-    borrowed(parent, args,{pgResource}, info) {
+    borrowed(parent, args, { pgResource }, info) {
       try {
         const items = pgResource.getBorrowedItemsForUser(parent.id);
-        console.log(items);
+
         return items;
       } catch (e) {
         throw new ApolloError(e);
-      }  
-   }
+      }
+    }
   },
   Item: {
     /**
@@ -45,47 +43,37 @@ const relationResolvers = {
      *
      */
     // @TODO: Uncomment these lines after you define the Item type with these fields
-    async itemowner({itemowner}, args,{pgResource}, info) {
-      
+    async itemowner({ itemowner }, args, { pgResource }, info) {
       try {
         const items = pgResource.getUserById(itemowner);
-        
+
         return items;
       } catch (e) {
         throw new ApolloError(e);
-      }  
-     
+      }
     },
-    async tags(parent, args,{pgResource}, info) {
-   
+    async tags(parent, args, { pgResource }, info) {
       try {
         const tagsItems = pgResource.getTagsForItem(parent.id);
-       
+
         return tagsItems;
       } catch (e) {
         throw new ApolloError(e);
-      }  
-   },
-   async borrower({borrower}, args,{pgResource}, info) {
-    
-     try {
-      if(borrower){
-        const borrowerUser = pgResource.getUserById(borrower);
-        return borrowerUser;
-       }
-       else{
-         return null;
-       }
-       
-     } catch (e) {
-       throw new ApolloError(e);
-     }  
+      }
+    },
+    async borrower({ borrower }, args, { pgResource }, info) {
+      try {
+        if (borrower) {
+          const borrowerUser = pgResource.getUserById(borrower);
+          return borrowerUser;
+        } else {
+          return null;
+        }
+      } catch (e) {
+        throw new ApolloError(e);
+      }
     }
-     
   }
- 
-  
-
 };
 
-module.exports =relationResolvers;
+module.exports = relationResolvers;
