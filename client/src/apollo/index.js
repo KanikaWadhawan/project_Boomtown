@@ -1,15 +1,15 @@
-import { ApolloClient } from 'apollo-client';
-import { ApolloLink } from 'apollo-link';
+import { ApolloClient } from "apollo-client";
+import { ApolloLink } from "apollo-link";
 import { createHttpLink } from "apollo-link-http";
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { onError } from 'apollo-link-error';
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { onError } from "apollo-link-error";
 
 const httpLink = createHttpLink({
   includeExtensions: true,
   // @TODO: If `process.env.NODE_ENV !== 'production'`, then use localhost's GraphQL endpoint
-  uri: undefined,
+  uri: process.env.NODE_ENV !== "production" && "http://localhost:8080/graphql",
   // -------------------------------
-  credentials: process.env.NODE_ENV === 'production' ? 'same-origin' : 'include'
+  credentials: process.env.NODE_ENV === "production" ? "same-origin" : ""
 });
 
 const client = new ApolloClient({
@@ -24,10 +24,11 @@ const client = new ApolloClient({
         );
       }
       if (networkError) console.log(`[Network error]: ${networkError}`);
-    })
+    }),
+    httpLink
     /**
      * @TODO: Set your httpLink link as the next item in this array.
-     * Read about httpLink here: 
+     * Read about httpLink here:
      * Don't forget to add to add a comma after the first array item above!
      */
   ]),

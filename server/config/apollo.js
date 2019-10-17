@@ -19,7 +19,8 @@ module.exports = ({ app, pgResource }) => {
 
   // @TODO: Refactor to use 'makeExecutableSchema' to wire up your schema to your resolvers:
   const schema = makeExecutableSchema({
-    typeDefs, resolvers
+    typeDefs,
+    resolvers
   });
   // -------------------------------
 
@@ -34,18 +35,18 @@ module.exports = ({ app, pgResource }) => {
         // TODO:
         // If there is a token, verify that token to get user info and assign it to user variable
         // return req, token, user, pgResources
-        return {pgResource}
+        return { pgResource };
       } catch (e) {
         // throw error
       }
     },
-    schema,
+    schema
   });
 
   apolloServer.applyMiddleware({
     app,
     // @TODO: Add the CORS_CONFIG from your application configuration
-    cors: undefined,
+    cors: app.get("CORS_CONFIG")
     // -------------------------------
   });
 };
