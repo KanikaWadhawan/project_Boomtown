@@ -11,21 +11,30 @@ import { withStyles } from "@material-ui/core";
 import logo from "../../images/boomtown.svg";
 import Fab from "@material-ui/core/Fab";
 import MenuBarIcon from "./../MenuBarIcon";
+import { NavLink } from "react-router-dom";
 
 const MenuBar = ({ classes }) => {
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Toolbar>
         <IconButton
           edge="start"
           className={classes.menuButton}
           color="inherit"
           aria-label="menu"
+          component={NavLink}
+          to={"/items"}
         >
           <img height="48px" width="48px" src={logo}></img>
         </IconButton>
         <div className={classes.menuBar}>
-          <Fab variant="variant" color="primary" className={classes.fabbar}>
+          <Fab
+            variant="variant"
+            color="primary"
+            className={classes.fabbar}
+            component={NavLink}
+            to={"/share"}
+          >
             <AddCircle className={classes.extentedIcon} />
             Share Something
           </Fab>
