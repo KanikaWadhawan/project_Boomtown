@@ -40,9 +40,15 @@ yarn run build
 
 ## Technologies Used
 
-- PostgreSQL as a relational database to store shareable items and user info,
-- Node.js/Express as its web server,
-- GraphQL for its client-facing API.
+- Apollo Client & Server [![APOLLO](https://img.shields.io/badge/APOLLO-2.6.2-brightgreen.svg)](https://www.apollographql.com/)
+
+- PostgreSQL as a relational database to store shareable items and user info [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-12.0-brightgreen.svg)](https://www.postgresql.org/)
+
+- Node.js/Express as its web server [![Node-Postgres](https://img.shields.io/badge/Node--Postgres-7.11.0-brightgreen.svg)](https://node-postgres.com/)
+
+- GraphQL for its client-facing API. [![GraphQL](https://img.shields.io/badge/GraphQL-14.3.1-brightgreen.svg)](https://graphql.org/)
+
+* Express [![Express](https://img.shields.io/badge/Express-4.17.1-brightgreen.svg)](https://expressjs.com/)
 
 ## Personal Learnings
 
