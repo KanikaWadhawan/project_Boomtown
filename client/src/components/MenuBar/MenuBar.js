@@ -22,7 +22,7 @@ const MenuBar = ({ classes }) => {
           color="inherit"
           aria-label="menu"
         >
-          <img src={logo}></img>
+          <img height="48px" width="48px" src={logo}></img>
         </IconButton>
         <div className={classes.menuBar}>
           <Fab variant="variant" color="primary" className={classes.fabbar}>

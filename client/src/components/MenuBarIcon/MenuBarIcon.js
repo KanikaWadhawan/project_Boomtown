@@ -5,6 +5,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import FingerprintIcon from "@material-ui/icons/Fingerprint";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import { NavLink } from "react-router-dom";
+import { Typography } from "@material-ui/core";
 
 const ITEM_HEIGHT = 48;
 
@@ -43,13 +46,22 @@ export default function LongMenu() {
           }
         }}
       >
-        <MenuItem onClick={handleClose}>
-          <FingerprintIcon />
-          Your Profile
+        <MenuItem component={NavLink} to={"/profile"} onClick={handleClose}>
+          <ListItemIcon>
+            <FingerprintIcon fontSize="default" />
+          </ListItemIcon>
+          <Typography variant="inherit" noWrap>
+            Your Profile
+          </Typography>
         </MenuItem>
+
         <MenuItem onClick={handleClose}>
-          <PowerSettingsNewIcon />
-          Sign Out
+          <ListItemIcon>
+            <PowerSettingsNewIcon fontSize="default" />
+          </ListItemIcon>
+          <Typography variant="inherit" noWrap>
+            Sign Out
+          </Typography>
         </MenuItem>
       </Menu>
     </div>

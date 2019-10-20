@@ -18,9 +18,6 @@ const styles = theme => ({
   },
   fabbar: {
     boxShadow: "none"
-  },
-  img: {
-    height: 40
   }
 });
 
