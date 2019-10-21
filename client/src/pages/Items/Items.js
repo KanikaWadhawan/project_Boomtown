@@ -1,14 +1,19 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import styles from './styles';
+//Stateless Component
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import styles from "./styles";
+import { Container } from "@material-ui/core";
+import { ItemsGrid } from "../../components";
 
-const Items = ({ classes }) => {
+const Items = ({ classes, items }) => {
   return (
-    <div>
-      <p>
-        This is the items page located at <code>/items</code>.
-      </p>
-    </div>
+    <Container
+      component="section"
+      maxWidth={false}
+      className={classes.pageItems}
+    >
+      <ItemsGrid items={items} />
+    </Container>
   );
 };
 
