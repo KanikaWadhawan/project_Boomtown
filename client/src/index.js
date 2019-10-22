@@ -4,6 +4,7 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 // @TODO: Uncomment each module as needed in your client app
 import { ApolloProvider } from "react-apollo";
+import ItemPreviewProvider from "./context/ItemPreviewProvider";
 
 // import { Provider as ReduxProvider } from 'react-redux'
 // -------------------------------
@@ -70,9 +71,11 @@ const App = () => {
     <ApolloProvider client={client}>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <Router>
-          <Routes></Routes>
-        </Router>
+        <ItemPreviewProvider>
+          <Router>
+            <Routes></Routes>
+          </Router>
+        </ItemPreviewProvider>
       </MuiThemeProvider>
     </ApolloProvider>
   );

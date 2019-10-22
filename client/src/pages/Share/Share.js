@@ -16,7 +16,7 @@ import styles from "./styles";
 // import ShareItemPreview from '../../components/ShareItemPreview';
 
 import { Container, Grid } from "@material-ui/core";
-import { ShareItemForm, ItemCard as ShareItemPreview } from "../../components";
+import { ShareItemForm, ShareItemPreview } from "../../components";
 
 const Share = ({ classes, tags }) => {
   return (
