@@ -12,14 +12,24 @@ import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 import { Form, Field, FormSpy } from "react-final-form";
 import { ItemPreviewContext } from "../../context/ItemPreviewProvider";
+import { Mutation } from "react-apollo";
+import { ADD_ITEM_MUTATION } from "../../apollo/queries";
 
 class ShareForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      disableButton: true
+    };
   }
   onSubmit = values => {};
-  validate = values => {};
+  validate = ({ title, description, tags }) => {
+    if (title && description && tags) {
+      this.setState({ disableButton: false });
+      return;
+    }
+    this.setState({ disableButton: true });
+  };
 
   applyTags = (tags, allTags) => {
     return tags.map(tag => {
@@ -41,11 +51,24 @@ class ShareForm extends Component {
     });
   };
 
-  saveItems = (values, allTags, addItem) => {};
+  saveItems = async (values, allTags, addItem) => {
+    try {
+      // new item
+      const newItem = {
+        ...values,
+        tags: this.applyTags(values.tags || [], allTags)
+      };
+      // add item
+      await addItem({ variables: { input: newItem } });
+    } catch (e) {
+      throw e;
+    }
+  };
 
   render() {
+    // this tags are alltags coming from the server
     const { classes, tags } = this.props;
-    console.log(tags);
+    // console.log(tags);
 
     return (
       <ItemPreviewContext.Consumer>
@@ -61,94 +84,106 @@ class ShareForm extends Component {
               >
                 Share. Borrow. Prosper.
               </Typography>
-              <Form
-                onSubmit={this.onSubmit}
-                validate={this.validate}
-                render={({ handleSubmit }) => (
-                  <form onSubmit={handleSubmit}>
-                    <FormSpy
-                      subscription={{ values: true }}
-                      onChange={({ values }) => {
-                        if (values) {
-                          this.dispatchUpdate(values, tags, updatePreview);
-                        }
-                        return "";
-                      }}
-                    />
-
-                    {/* /End of FormSpy/ */}
-                    <Field
-                      name="title"
-                      render={({ input, meta }) => (
-                        <Input
-                          required
-                          className={classes.ShareItemFormContents}
-                          type="text"
-                          fullWidth
-                          placeholder="Name your Item"
-                          inputProps={{
-                            "aria-label": "Item name"
-                          }}
-                          {...input}
-                          value={input.value}
-                        />
-                      )}
-                    />
-                    {/* // */}
-                    <Field
-                      name="description"
-                      render={({ input, meta }) => (
-                        <Input
-                          required
-                          className={classes.ShareItemFormContents}
-                          type="text"
-                          fullWidth
-                          placeholder="Describe your Item"
-                          inputProps={{
-                            "aria-label": "Item description"
-                          }}
-                          {...input}
-                          value={input.value}
-                        />
-                      )}
-                    />
-                    {/* // */}
-                    <div className={classes.ShareItemFormContents}>
-                      <Typography
-                        gutterBottom
-                        variant="body1"
-                        component="p"
-                        color="textPrimary"
+              <Mutation mutation={ADD_ITEM_MUTATION}>
+                {addItem => (
+                  <Form
+                    onSubmit={values => {
+                      this.saveItems(values, tags, addItem);
+                    }}
+                    validate={this.validate}
+                    render={({ handleSubmit, form }) => (
+                      <form
+                        onSubmit={event => {
+                          handleSubmit(event);
+                          form.reset();
+                          resetPreview();
+                        }}
                       >
-                        Add Tags:
-                      </Typography>
-                      {/* start tag map */}
-                      {tags.map(tag => (
-                        <label>
-                          <Field
-                            name="tags"
-                            component="input"
-                            type="checkbox"
-                            value={tag.title}
-                          />{" "}
-                          {tag.title}
-                        </label>
-                      ))}
+                        <FormSpy
+                          subscription={{ values: true }}
+                          onChange={({ values }) => {
+                            if (values) {
+                              this.dispatchUpdate(values, tags, updatePreview);
+                            }
+                            return "";
+                          }}
+                        />
 
-                      {/* end tag map */}
-                    </div>
-                    {/* */}
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      disabled
-                      type="submit"
-                    >
-                      Share
-                    </Button>
-                  </form>
+                        {/* /End of FormSpy/ */}
+                        <Field
+                          name="title"
+                          render={({ input, meta }) => (
+                            <Input
+                              required
+                              className={classes.ShareItemFormContents}
+                              type="text"
+                              fullWidth
+                              placeholder="Name your Item"
+                              inputProps={{
+                                "aria-label": "Item name"
+                              }}
+                              {...input}
+                              value={input.value}
+                            />
+                          )}
+                        />
+                        {/* // */}
+                        <Field
+                          name="description"
+                          render={({ input, meta }) => (
+                            <Input
+                              required
+                              className={classes.ShareItemFormContents}
+                              type="text"
+                              fullWidth
+                              placeholder="Describe your Item"
+                              inputProps={{
+                                "aria-label": "Item description"
+                              }}
+                              {...input}
+                              value={input.value}
+                            />
+                          )}
+                        />
+                        {/* // */}
+                        <div className={classes.ShareItemFormContents}>
+                          <Typography
+                            gutterBottom
+                            variant="body1"
+                            component="p"
+                            color="textPrimary"
+                          >
+                            Add Tags:
+                          </Typography>
+                          {/* start tag map */}
+                          {tags.map(tag => (
+                            <label>
+                              <Field
+                                name="tags"
+                                component="input"
+                                type="checkbox"
+                                value={tag.title}
+                              />{" "}
+                              {tag.title}
+                            </label>
+                          ))}
+
+                          {/* end tag map */}
+                        </div>
+                        {/* */}
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          disabled={this.state.disableButton}
+                          type="submit"
+                        >
+                          Share
+                        </Button>
+                      </form>
+                    )}
+                  />
                 )}
-              />
+              </Mutation>
             </Fragment>
           );
         }}
