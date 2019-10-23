@@ -34,7 +34,7 @@ const ItemCard = ({ classes, itemInfo }) => {
           <CardMedia
             className={classes.cardMediaItemsImg}
             // image={DodoImg}
-            image={itemInfo.imageurl}
+            image={info.imageurl}
             title={info.title}
           />
         </CardActionArea>
