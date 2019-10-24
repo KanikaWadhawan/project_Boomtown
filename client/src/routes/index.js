@@ -18,7 +18,7 @@ export default () => (
       }
       return (
         <Fragment>
-          {console.log(viewer)}
+          {/* {console.log(viewer)} */}
 
           <MenuBar />
           <Switch>

@@ -146,6 +146,24 @@ class ShareForm extends Component {
                           )}
                         />
                         {/* // */}
+                        <Field
+                          name="imageurl"
+                          render={({ input, meta }) => (
+                            <Input
+                              required
+                              className={classes.ShareItemFormContents}
+                              type="text"
+                              fullWidth
+                              placeholder="Url of your Item"
+                              inputProps={{
+                                "aria-label": "Item url"
+                              }}
+                              {...input}
+                              value={input.value}
+                            />
+                          )}
+                        />
+                        {/* // */}
                         <div className={classes.ShareItemFormContents}>
                           <Typography
                             gutterBottom
