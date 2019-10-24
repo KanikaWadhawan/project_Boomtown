@@ -28,56 +28,56 @@ const ItemCard = ({ classes, itemInfo }) => {
   let info = itemInfo ? itemInfo : defaultItemInfo;
 
   return (
-    <Grid item xs={12} sm={itemInfo ? 6 : 12} md={itemInfo ? 4 : 12}>
-      <Card>
-        <CardActionArea>
-          <CardMedia
-            className={classes.cardMediaItemsImg}
-            // image={DodoImg}
-            image={info.imageurl}
-            title={info.title}
-          />
-        </CardActionArea>
-        <CardHeader
-          avatar={<Avatar alt={info.itemowner.fullname} src={ProfileImg} />}
-          title={info.itemowner.fullname}
-          subheader="October 20, 2019"
+    // <Grid item xs={12} sm={itemInfo ? 6 : 12} md={itemInfo ? 4 : 12}>
+    <Card>
+      <CardActionArea>
+        <CardMedia
+          className={classes.cardMediaItemsImg}
+          // image={DodoImg}
+          image={info.imageurl}
+          title={info.title}
         />
-        <CardContent>
-          <Typography
-            aria-label={info.title}
-            gutterBottom
-            variant="h5"
-            component="h2"
-          >
-            {info.title.length > 40
-              ? `${info.title.slice(0, 40)}...`
-              : info.title}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {info.tags
-              ? info.tags
-                  .map(tag => tag.title)
-                  .sort()
-                  .join(", ")
-              : "No tags are found"}
-          </Typography>
-          <Typography
-            aria-label={info.description}
-            variant="body1"
-            color="textPrimary"
-            component="p"
-          >
-            {info.description.length > 150
-              ? `${info.description.slice(0, 150)}...`
-              : info.description}
-          </Typography>
-        </CardContent>
-        <CardActions className={classes.cardMediaItemsBtn}>
-          <Button variant="outlined">Borrow</Button>
-        </CardActions>
-      </Card>
-    </Grid>
+      </CardActionArea>
+      <CardHeader
+        avatar={<Avatar alt={info.itemowner.fullname} src={ProfileImg} />}
+        title={info.itemowner.fullname}
+        subheader="October 20, 2019"
+      />
+      <CardContent>
+        <Typography
+          aria-label={info.title}
+          gutterBottom
+          variant="h5"
+          component="h2"
+        >
+          {info.title.length > 40
+            ? `${info.title.slice(0, 40)}...`
+            : info.title}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {info.tags
+            ? info.tags
+                .map(tag => tag.title)
+                .sort()
+                .join(", ")
+            : "No tags are found"}
+        </Typography>
+        <Typography
+          aria-label={info.description}
+          variant="body1"
+          color="textPrimary"
+          component="p"
+        >
+          {info.description.length > 150
+            ? `${info.description.slice(0, 150)}...`
+            : info.description}
+        </Typography>
+      </CardContent>
+      <CardActions className={classes.cardMediaItemsBtn}>
+        <Button variant="outlined">Borrow</Button>
+      </CardActions>
+    </Card>
+    // </Grid>
   );
 };
 
