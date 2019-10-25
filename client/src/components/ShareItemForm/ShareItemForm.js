@@ -14,6 +14,14 @@ import { Form, Field, FormSpy } from "react-final-form";
 import { ItemPreviewContext } from "../../context/ItemPreviewProvider";
 import { Mutation } from "react-apollo";
 import { ADD_ITEM_MUTATION } from "../../apollo/queries";
+import {
+  AcUnit as AcUnitIcon,
+  AccountBalance as AccountBalanceIcon,
+  AccountBalanceWallet as AccountBalanceWalletIcon,
+  Adb as AdbIcon,
+  AirportShuttle as AirportShuttleIcon,
+  Album as AlbumIcon
+} from "@material-ui/icons";
 
 class ShareForm extends Component {
   constructor(props) {
@@ -174,7 +182,7 @@ class ShareForm extends Component {
                             Add Tags:
                           </Typography>
                           {/* start tag map */}
-                          {tags.map(tag => (
+                          {tags.map((tag, index) => (
                             <label>
                               <Field
                                 name="tags"
@@ -182,7 +190,23 @@ class ShareForm extends Component {
                                 type="checkbox"
                                 value={tag.title}
                               />{" "}
-                              {tag.title}
+                              {tag.title} &nbsp;
+                              {
+                                ({ index } =
+                                  index === 0 ? (
+                                    <AccountBalanceIcon />
+                                  ) : index === 1 ? (
+                                    <AirportShuttleIcon />
+                                  ) : index === 2 ? (
+                                    <AccountBalanceWalletIcon />
+                                  ) : index === 3 ? (
+                                    <AdbIcon />
+                                  ) : index === 4 ? (
+                                    <AlbumIcon />
+                                  ) : (
+                                    <AcUnitIcon />
+                                  ))
+                              }
                             </label>
                           ))}
 
