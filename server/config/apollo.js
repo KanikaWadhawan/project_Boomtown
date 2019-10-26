@@ -1,5 +1,6 @@
 const { ApolloServer } = require("apollo-server-express");
 const { makeExecutableSchema } = require("graphql-tools");
+const jwt = require("jsonwebtoken");
 
 const typeDefs = require("../api/schema");
 let resolvers = require("../api/resolvers");
@@ -7,17 +8,6 @@ let resolvers = require("../api/resolvers");
 module.exports = ({ app, pgResource }) => {
   resolvers = resolvers(app);
 
-  /**
-   * @TODO: Initialize Apollo Server
-   *
-   * Once you've defined your schema types, it's time to wire up your schema
-   * to your resolving functions. This is Apollo magic, and it's done using
-   * the 'makeExecutableSchema' function provided by the 'graphql-tools' package.
-   *
-   * https://www.apollographql.com/docs/apollo-server/v2/api/graphql-tools.html#makeExecutableSchema
-   */
-
-  // @TODO: Refactor to use 'makeExecutableSchema' to wire up your schema to your resolvers:
   const schema = makeExecutableSchema({
     typeDefs,
     resolvers
@@ -30,11 +20,11 @@ module.exports = ({ app, pgResource }) => {
       let user = null;
 
       try {
-        // TODO:
-        // If there is a token, verify that token to get user info and assign it to user variable
+        if (token) {
+          user = jwt.verify(token, app.get("JWT_SECRET"));
+        }
         return { req, token, user, pgResource };
-        // return { pgResource };
-      } catch (e) {
+      } catch (error) {
         throw error;
       }
     },
@@ -43,8 +33,6 @@ module.exports = ({ app, pgResource }) => {
 
   apolloServer.applyMiddleware({
     app,
-    // @TODO: Add the CORS_CONFIG from your application configuration
     cors: app.get("CORS_CONFIG")
-    // -------------------------------
   });
 };

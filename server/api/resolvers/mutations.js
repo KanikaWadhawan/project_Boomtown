@@ -1,6 +1,7 @@
 const { ApolloError } = require("apollo-server-express");
 const { AuthenticationError } = require("apollo-server-express");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 function setCookie({ tokenName, token, res }) {
   res.cookie(tokenName, token, {
@@ -14,12 +15,12 @@ function generateToken(user, secret) {
   const { id, email, fullname, bio } = user; // Omit the password from the token
 
   return jwt.sign({ id, email, fullname, bio }, secret, {
-    expiresIn: "6h"
+    expiresIn: "2h"
   });
 }
 
 // @TODO: Uncomment these lines later when we add auth
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 // const authMutations = require("./auth")
 // -------------------------------
 
@@ -68,25 +69,23 @@ const mutationResolvers = app => ({
       const user = await pgResource.getUserAndPasswordForVerification(email);
       if (!user) throw "User was not found.";
 
-      const valid = false;
+      // const valid = false;
 
-      const same = await bcrypt.compare(password, user.password);
-      if (same) {
-        const token = generateToken(user, app.get("JWT_SECRET"));
-
-        setCookie({
-          tokenName: app.get("JWT_COOKIE_NAME"),
-          token,
-          res: req.res
-        });
-
-        return {
-          token,
-          user
-        };
-      }
-
+      const valid = await bcrypt.compare(password, user.password);
+      // if (valid) {
+      const token = generateToken(user, app.get("JWT_SECRET"));
       if (!valid) throw "Invalid Password";
+      setCookie({
+        tokenName: app.get("JWT_COOKIE_NAME"),
+        token,
+        res: req.res
+      });
+
+      return {
+        token,
+        user
+      };
+      // }
     } catch (e) {
       throw new AuthenticationError(e);
     }
@@ -97,15 +96,19 @@ const mutationResolvers = app => ({
     return true;
   },
   async addItem(parent, { input }, { pgResource, token }, info) {
-    const user = await jwt.decode(token, app.get("JWT_SECRET"));
+    try {
+      const user = await jwt.decode(token, app.get("JWT_SECRET"));
 
-    // const user = 1; //DUMMY USER
-    const newItem = await pgResource.saveNewItem({
-      item: input,
-      user
-    });
+      // const user = 1; //DUMMY USER
+      const newItem = await pgResource.saveNewItem({
+        item: input,
+        user
+      });
 
-    return newItem;
+      return newItem;
+    } catch (e) {
+      throw new ApolloError(e);
+    }
   }
 });
 
