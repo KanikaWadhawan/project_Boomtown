@@ -79,6 +79,7 @@ export const ADD_ITEM_MUTATION = gql`
     addItem(input: $input) {
       title
       description
+      imageurl
       tags {
         id
         title
@@ -121,7 +122,12 @@ export const LOGIN_MUTATION = gql`
   mutation login($user: LoginInput!) {
     login(user: $user) {
       token
-      user
+      user {
+        id
+        email
+        fullname
+        bio
+      }
     }
   }
 `;

@@ -10,9 +10,10 @@ module.exports = postgres => {
   return {
     async createUser({ fullname, email, password }) {
       const newUserInsert = {
-        text: "", // @TODO: Authentication - Server
+        text: `INSERT INTO users(fullname,email, password) VALUES ($1,$2,$3) RETURNING *`,
         values: [fullname, email, password]
       };
+      console.log(newUserInsert);
       try {
         const user = await postgres.query(newUserInsert);
         return user.rows[0];
@@ -29,7 +30,7 @@ module.exports = postgres => {
     },
     async getUserAndPasswordForVerification(email) {
       const findUserQuery = {
-        text: "", // @TODO: Authentication - Server
+        text: `SELECT * FROM users WHERE email = $1`, // @TODO: Authentication - Server
         values: [email]
       };
       try {
@@ -134,8 +135,8 @@ module.exports = postgres => {
               // Generate new Item query
 
               const newItem = {
-                text: ` INSERT INTO items (title, description, itemowner) VALUES ($1, $2, $3) RETURNING *`,
-                values: [title, description, user]
+                text: ` INSERT INTO items (title, description, itemowner, imageurl) VALUES ($1, $2, $3 ,$4) RETURNING *`,
+                values: [title, description, user, imageurl]
               };
 
               // Insert new Item

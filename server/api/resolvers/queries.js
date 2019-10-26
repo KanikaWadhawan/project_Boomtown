@@ -22,7 +22,8 @@ const queryResolvers = app => ({
       bio: "Wreck Everything",
       email: "ralph@wreckit.com"
     };
-    return fakeUser;
+    // return fakeUser;
+    return null;
   },
 
   async user(parent, { id }, { pgResource }, info) {
