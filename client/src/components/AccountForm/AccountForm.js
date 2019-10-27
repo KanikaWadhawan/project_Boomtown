@@ -17,7 +17,6 @@ import { graphql, compose } from "react-apollo";
 import validate from "./helpers/validation";
 
 import styles from "./styles";
-// import { compose } from "react-apollo";
 
 class AccountForm extends Component {
   constructor(props) {
@@ -29,15 +28,15 @@ class AccountForm extends Component {
   }
 
   render() {
-    const { classes, login, signup } = this.props;
+    const { classes, LOGIN_MUTATION, SIGNUP_MUTATION } = this.props;
 
     return (
       <Form
         onSubmit={async values => {
           try {
             this.state.formToggle
-              ? await login({ variables: { user: values } })
-              : await signup({ variables: { user: values } });
+              ? await LOGIN_MUTATION({ variables: { user: values } })
+              : await SIGNUP_MUTATION({ variables: { user: values } });
           } catch (e) {
             this.setState({ error: e });
           }
@@ -51,6 +50,7 @@ class AccountForm extends Component {
               handleSubmit(event);
               form.reset();
             }}
+            noValidate
             className={classes.accountForm}
           >
             {!this.state.formToggle && (
@@ -157,14 +157,20 @@ class AccountForm extends Component {
 // @TODO: Use compose to add the login and signup mutations to this components props.
 
 // @TODO: Refetch the VIEWER_QUERY to reload the app and access authenticated routes.
-const refetchQuery = [
+const refetchQueries = [
   {
     query: VIEWER_QUERY
   }
 ];
 
 export default compose(
-  graphql(LOGIN_MUTATION, { options: { refetchQuery }, name: "login" }),
-  graphql(SIGNUP_MUTATION, { options: { refetchQuery }, name: "signup" }),
+  graphql(LOGIN_MUTATION, {
+    options: { refetchQueries },
+    name: "LOGIN_MUTATION"
+  }),
+  graphql(SIGNUP_MUTATION, {
+    options: { refetchQueries },
+    name: "SIGNUP_MUTATION"
+  }),
   withStyles(styles)
 )(AccountForm);

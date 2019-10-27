@@ -30,7 +30,7 @@ module.exports = postgres => {
     },
     async getUserAndPasswordForVerification(email) {
       const findUserQuery = {
-        text: `SELECT * FROM users WHERE email = $1`, // @TODO: Authentication - Server
+        text: `SELECT * FROM users WHERE email = $1`,
         values: [email]
       };
       try {
@@ -58,16 +58,6 @@ module.exports = postgres => {
       } catch (e) {
         throw e;
       }
-      /**
-       *  Refactor the following code using the error handling logic described above.
-       *  When you're done here, ensure all of the resource methods in this file
-       *  include a try catch, and throw appropriate errors.
-       *
-       *  Ex: If the user is not found from the DB throw 'User is not found'
-       *  If the password is incorrect throw 'User or Password incorrect'
-       */
-
-      // -------------------------------
     },
     async getItems(idToOmit) {
       const items = await postgres.query({
@@ -122,11 +112,6 @@ module.exports = postgres => {
     },
     async saveNewItem({ item, user }) {
       return new Promise((resolve, reject) => {
-        /**
-         * Begin transaction by opening a long-lived connection
-         * to a client from the client pool.
-         * - Read about transactions here: https://node-postgres.com/features/transactions
-         */
         postgres.connect((err, client, done) => {
           try {
             client.query("BEGIN", async err => {

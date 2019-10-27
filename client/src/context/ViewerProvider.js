@@ -2,13 +2,15 @@ import { Query } from "react-apollo";
 import React, { Fragment } from "react";
 import { VIEWER_QUERY } from "../apollo/queries";
 
+import FullScreenLoader from "../components/FullScreenLoader";
+
 const ViewerContext = React.createContext();
 
 const ViewerProvider = ({ children }) => {
   return (
     <Query query={VIEWER_QUERY}>
       {({ loading, error, data }) => {
-        if (loading) return "Loading";
+        if (loading) return <FullScreenLoader />;
         if (error) return `Error: ${error}`;
         // console.log(data);
         const viewer = data && data.viewer ? data.viewer : null;
