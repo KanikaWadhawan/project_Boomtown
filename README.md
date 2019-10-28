@@ -50,6 +50,12 @@ yarn run build
 
 * Express [![Express](https://img.shields.io/badge/Express-4.17.1-brightgreen.svg)](https://expressjs.com/)
 
+## Physical Data Model
+
+![Preview](_snapshots/data_model.png)
+
+It represents the actual design blueprint of a relational database and how data should be structured and related in a specific DBMS.
+
 ## Personal Learnings
 
 ### PostgreSQL
@@ -275,3 +281,61 @@ mutation createPerson(
 
 
 ```
+
+### React Router
+
+Add this code to your App.js file:
+
+```
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  Redirect
+} from 'react-router-dom';
+
+```
+
+### Router Basics
+
+- BrowserRouter: used to wrap all of the routes we define
+- Route: used for identifying each route (inclusively)
+- Switch: used to render the first child Route that matches the location
+- Link: used to navigate around an application
+- Redirect: used to navigate to a new location, like server-side redirects (HTTP 3xx) do
+
+#### Adding the Router
+
+```
+const Home = () => <h1>Hello, World!</h1>;
+const Contact = () => <h1>Get in touch!</h1>;
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div>
+          <Route exact path="/" component={Home} />
+          <Route path="/contact" component={Contact} />
+        </div>
+      </Router>
+    );
+  }
+}
+
+
+```
+
+### Material-UI
+
+Material-UI components work in isolation. They are self-supporting, and will only inject the styles they need to display. They don't rely on any global style-sheets such as normalize.css.
+
+### Preview of the Boomtown App
+
+![Welcome Page](_snapshots/welcome-page.png)
+
+![Items Page](_snapshots/items-page.png)
+
+![Share Page](_snapshots/shares-page.png)
+
+![Profile Page](_snapshots/profile-page.png)
