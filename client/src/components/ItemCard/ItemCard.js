@@ -8,13 +8,13 @@ import {
   CardHeader,
   CardMedia,
   Button,
-  Grid,
+  // Grid,
   Typography
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
-import DodoImg from "../../images/dodo.jpg";
+// import DodoImg from "../../images/dodo.jpg";
 import ProfileImg from "../../images/doggy.png";
 
 const ItemCard = ({ classes, itemInfo }) => {

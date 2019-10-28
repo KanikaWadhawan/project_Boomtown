@@ -1,5 +1,3 @@
-import { textAlign } from "@material-ui/system";
-
 const styles = theme => ({
   progress: {
     margin: theme.spacing(2)

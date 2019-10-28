@@ -1,23 +1,27 @@
 const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: 0,
+    width: theme.typography.pxToRem(48),
+    height: theme.typography.pxToRem(48)
   },
-  title: {
-    flexGrow: 1
+  imgLogo: {
+    height: "100%"
   },
   menuBar: {
     flexGrow: 1,
     display: "flex",
     justifyContent: "flex-end"
   },
-  extentedIcon: {
-    marginRight: theme.spacing(1)
+  btnShare: {
+    boxShadow: "none",
+    marginRight: theme.spacing(2),
+    "&:hover": {
+      boxShadow: "none",
+      backgroundColor: "rgba(0, 0, 0, 0.08)"
+    }
   },
-  fabbar: {
-    boxShadow: "none"
+  extendedIcon: {
+    marginRight: theme.spacing(1)
   }
 });
 
