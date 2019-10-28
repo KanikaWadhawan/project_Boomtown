@@ -30,13 +30,6 @@ const ItemFields = gql`
   }
 `;
 
-// export const ITEM_QUERY = gql`
-//   query item($id: ID!) {
-//     # @TODO: Query an item by its id and return the ItemFields fragment.
-//   }
-//   ${ItemFields}
-// `;
-
 export const ALL_ITEMS_QUERY = gql`
   query items($filter: ID) {
     items(filter: $filter) {
@@ -72,8 +65,6 @@ export const ALL_TAGS_QUERY = gql`
   }
 `;
 
-//# @TODO: Pass the item and image into the addItem mutation as arguments
-//# and return the new item id when the mutation is complete.
 export const ADD_ITEM_MUTATION = gql`
   mutation addNewItem($input: NewItemInput!) {
     addItem(input: $input) {

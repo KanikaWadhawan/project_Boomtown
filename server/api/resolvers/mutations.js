@@ -69,10 +69,8 @@ const mutationResolvers = app => ({
       const user = await pgResource.getUserAndPasswordForVerification(email);
       if (!user) throw "User was not found.";
 
-      // const valid = false;
-
       const valid = await bcrypt.compare(password, user.password);
-      // if (valid) {
+
       const token = generateToken(user, app.get("JWT_SECRET"));
       if (!valid) throw "Invalid Password";
       setCookie({
@@ -85,7 +83,6 @@ const mutationResolvers = app => ({
         token,
         user
       };
-      // }
     } catch (e) {
       throw new AuthenticationError(e);
     }

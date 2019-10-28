@@ -12,7 +12,7 @@ const ViewerProvider = ({ children }) => {
       {({ loading, error, data }) => {
         if (loading) return <FullScreenLoader />;
         if (error) return `Error: ${error}`;
-        // console.log(data);
+
         const viewer = data && data.viewer ? data.viewer : null;
         return (
           <ViewerContext.Provider value={{ viewer }}>

@@ -8,13 +8,11 @@ import {
   CardHeader,
   CardMedia,
   Button,
-  // Grid,
   Typography
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
-// import DodoImg from "../../images/dodo.jpg";
 import ProfileImg from "../../images/doggy.png";
 
 const ItemCard = ({ classes, itemInfo }) => {
@@ -28,12 +26,10 @@ const ItemCard = ({ classes, itemInfo }) => {
   let info = itemInfo ? itemInfo : defaultItemInfo;
 
   return (
-    // <Grid item xs={12} sm={itemInfo ? 6 : 12} md={itemInfo ? 4 : 12}>
     <Card>
       <CardActionArea>
         <CardMedia
           className={classes.cardMediaItemsImg}
-          // image={DodoImg}
           image={info.imageurl}
           title={info.title}
         />
@@ -77,7 +73,6 @@ const ItemCard = ({ classes, itemInfo }) => {
         <Button variant="outlined">Borrow</Button>
       </CardActions>
     </Card>
-    // </Grid>
   );
 };
 

@@ -144,7 +144,6 @@ class AccountForm extends Component {
               </Grid>
             </FormControl>
             <Typography className={classes.errorMessage}>
-              {/* @TODO: Display sign-up and login errors */}
               {this.state.error ? this.state.error.message : ""}
             </Typography>
           </form>
@@ -154,9 +153,6 @@ class AccountForm extends Component {
   }
 }
 
-// @TODO: Use compose to add the login and signup mutations to this components props.
-
-// @TODO: Refetch the VIEWER_QUERY to reload the app and access authenticated routes.
 const refetchQueries = [
   {
     query: VIEWER_QUERY
