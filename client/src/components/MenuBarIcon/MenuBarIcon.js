@@ -1,19 +1,25 @@
-import React from "react";
-import IconButton from "@material-ui/core/IconButton";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import FingerprintIcon from "@material-ui/icons/Fingerprint";
-import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import {
+  IconButton,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  Typography
+} from "@material-ui/core";
 
-const ITEM_HEIGHT = 48;
+import {
+  MoreVert as MoreVertIcon,
+  Fingerprint as FingerprintIcon,
+  PowerSettingsNew as PowerSettingsNewIcon
+} from "@material-ui/icons";
 
-export default function LongMenu() {
+// import { graphql } from "react-apollo";
+import { graphql, compose } from "react-apollo";
+import { LOGOUT_MUTATION, VIEWER_QUERY } from "../../apollo/queries";
+
+const SimpleMenu = ({ LOGOUT_MUTATION }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -23,8 +29,12 @@ export default function LongMenu() {
     setAnchorEl(null);
   };
 
+  const logout = () => {
+    console.log(1);
+  };
+
   return (
-    <div>
+    <Fragment>
       <IconButton
         aria-label="more"
         aria-controls="long-menu"
@@ -33,18 +43,13 @@ export default function LongMenu() {
       >
         <MoreVertIcon />
       </IconButton>
+
       <Menu
-        id="long-menu"
+        id="simple-menu"
         anchorEl={anchorEl}
         keepMounted
-        open={open}
+        open={Boolean(anchorEl)}
         onClose={handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: 200
-          }
-        }}
       >
         <MenuItem component={NavLink} to={"/profile"} onClick={handleClose}>
           <ListItemIcon>
@@ -55,7 +60,16 @@ export default function LongMenu() {
           </Typography>
         </MenuItem>
 
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            try {
+              LOGOUT_MUTATION();
+            } catch (e) {
+              throw e;
+            }
+          }}
+        >
           <ListItemIcon>
             <PowerSettingsNewIcon fontSize="default" />
           </ListItemIcon>
@@ -64,6 +78,15 @@ export default function LongMenu() {
           </Typography>
         </MenuItem>
       </Menu>
-    </div>
+    </Fragment>
   );
-}
+};
+
+const refetchQueries = [{ query: VIEWER_QUERY }];
+
+export default compose(
+  graphql(LOGOUT_MUTATION, {
+    options: { refetchQueries },
+    name: "LOGOUT_MUTATION"
+  })
+)(SimpleMenu);
