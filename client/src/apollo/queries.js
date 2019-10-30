@@ -90,18 +90,6 @@ export const ADD_ITEM_MUTATION = gql`
     }
   }
 `;
-//   mutation addNewItem($input: NewItemInput!) {
-//     addItem(input: $input) {
-//       title
-//       description
-//       imageurl
-//       tags {
-//         id
-//         title
-//       }
-//     }
-//   }
-// `;
 
 // /**
 //  * Auth-related queries and mutations.

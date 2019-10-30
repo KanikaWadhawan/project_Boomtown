@@ -13,7 +13,7 @@ module.exports = postgres => {
         text: `INSERT INTO users(fullname,email, password) VALUES ($1,$2,$3) RETURNING *`,
         values: [fullname, email, password]
       };
-      console.log(newUserInsert);
+
       try {
         const user = await postgres.query(newUserInsert);
         return user.rows[0];
