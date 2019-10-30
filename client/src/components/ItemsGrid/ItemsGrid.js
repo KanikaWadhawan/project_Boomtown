@@ -7,7 +7,7 @@ const ItemsGrid = ({ items }) => (
     {items.length
       ? items.map(itemInfo => {
           return (
-            <Grid item xs={12} sm={itemInfo ? 6 : 12} md={itemInfo ? 4 : 12}>
+            <Grid key={itemInfo.id} item xs={12} sm={6} md={4}>
               <ItemCard key={itemInfo.id} itemInfo={itemInfo} />;
             </Grid>
           );

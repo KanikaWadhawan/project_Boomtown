@@ -1,13 +1,5 @@
 import React, { Component, Fragment } from "react";
-import {
-  // FormControl,
-  // FormControlLabel,
-  // FormGroup,
-  // Checkbox,
-  Typography,
-  Input,
-  Button
-} from "@material-ui/core";
+import { Typography, Input, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 import { Form, Field, FormSpy } from "react-final-form";
@@ -67,7 +59,14 @@ class ShareForm extends Component {
         tags: this.applyTags(values.tags || [], allTags)
       };
       // add item
-      await addItem({ variables: { input: newItem } });
+      await addItem({
+        variables: {
+          title: values.title,
+          description: values.description,
+          tags: this.applyTags(values.tags || [], allTags),
+          imageurl: values.imageurl
+        }
+      });
     } catch (e) {
       throw e;
     }
@@ -183,7 +182,7 @@ class ShareForm extends Component {
                           </Typography>
                           {/* start tag map */}
                           {tags.map((tag, index) => (
-                            <label>
+                            <label key={index}>
                               <Field
                                 name="tags"
                                 component="input"

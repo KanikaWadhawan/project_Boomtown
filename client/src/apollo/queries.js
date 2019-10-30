@@ -66,8 +66,20 @@ export const ALL_TAGS_QUERY = gql`
 `;
 
 export const ADD_ITEM_MUTATION = gql`
-  mutation addNewItem($input: NewItemInput!) {
-    addItem(input: $input) {
+  mutation addItem(
+    $title: String!
+    $description: String!
+    $imageurl: String
+    $tags: [AssignedTag]!
+  ) {
+    addItem(
+      input: {
+        title: $title
+        description: $description
+        imageurl: $imageurl
+        tags: $tags
+      }
+    ) {
       title
       description
       imageurl
@@ -78,6 +90,18 @@ export const ADD_ITEM_MUTATION = gql`
     }
   }
 `;
+//   mutation addNewItem($input: NewItemInput!) {
+//     addItem(input: $input) {
+//       title
+//       description
+//       imageurl
+//       tags {
+//         id
+//         title
+//       }
+//     }
+//   }
+// `;
 
 // /**
 //  * Auth-related queries and mutations.
