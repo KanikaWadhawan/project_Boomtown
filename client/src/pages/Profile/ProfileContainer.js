@@ -20,6 +20,7 @@ class ProfileContainer extends Component {
                     ? match.params.userid
                     : viewer.id
               }}
+              fetchPolicy="network-only"
             >
               {({ loading, error, data }) => {
                 if (loading) return <FullScreenLoader />;

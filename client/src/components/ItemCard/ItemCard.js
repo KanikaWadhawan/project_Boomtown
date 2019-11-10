@@ -14,6 +14,7 @@ import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
 import ProfileImg from "../../images/doggy.png";
+import { Link } from "react-router-dom";
 
 const ItemCard = ({ classes, itemInfo }) => {
   const defaultItemInfo = {
@@ -28,12 +29,23 @@ const ItemCard = ({ classes, itemInfo }) => {
   return (
     <Card>
       <CardActionArea>
-        <CardMedia
-          className={classes.cardMediaItemsImg}
-          image={info.imageurl}
-          title={info.title}
-        />
+        {info.itemowner ? (
+          <CardMedia
+            className={classes.cardMediaItemsImg}
+            image={info.imageurl}
+            title={info.title}
+            component={Link}
+            to={`/profile/${info.itemowner.id}`}
+          />
+        ) : (
+          <CardMedia
+            className={classes.cardMediaItemsImg}
+            image={info.imageurl}
+            title={info.title}
+          />
+        )}
       </CardActionArea>
+
       <CardHeader
         avatar={<Avatar alt={info.itemowner.fullname} src={ProfileImg} />}
         title={info.itemowner.fullname}
