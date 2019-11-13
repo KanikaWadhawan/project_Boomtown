@@ -39,6 +39,7 @@ class AccountForm extends Component {
               : await SIGNUP_MUTATION({ variables: { user: values } });
           } catch (e) {
             this.setState({ error: e });
+            // this.setState({ error: { database: { ...e } } });
           }
         }}
         validate={values => {
@@ -144,7 +145,7 @@ class AccountForm extends Component {
               </Grid>
             </FormControl>
             <Typography className={classes.errorMessage}>
-              {this.state.error ? this.state.error.message : ""}
+              {this.state.error ? this.state.error.message.split(": ")[1] : ""}
             </Typography>
           </form>
         )}
