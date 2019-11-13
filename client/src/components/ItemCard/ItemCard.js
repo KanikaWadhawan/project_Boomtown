@@ -27,7 +27,7 @@ const ItemCard = ({ classes, itemInfo }) => {
   let info = itemInfo ? itemInfo : defaultItemInfo;
 
   return (
-    <Card>
+    <Card className={classes.card}>
       <CardActionArea>
         {info.itemowner ? (
           <CardMedia

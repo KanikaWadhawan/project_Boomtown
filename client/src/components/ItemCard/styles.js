@@ -4,6 +4,9 @@ const styles = theme => ({
   },
   cardMediaItemsBtn: {
     padding: theme.spacing(2)
+  },
+  card: {
+    height: 500
   }
 });
 
