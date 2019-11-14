@@ -12,12 +12,20 @@ const Share = ({ classes, tags }) => {
       maxWidth={false}
       className={classes.sharePage}
     >
-      <Grid container spacing={3}>
+      <Grid container spacing={6}>
         <Grid className={classes.sharePreview} item xs={12} sm={6}>
-          <ShareItemPreview />
+          <Grid container className={classes.containerChildLeft}>
+            <Grid item xs={12} className={classes.item}>
+              <ShareItemPreview />
+            </Grid>
+          </Grid>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <ShareItemForm tags={tags} />
+          <Grid container className={classes.containerChildRight}>
+            <Grid item xs={12} className={classes.item}>
+              <ShareItemForm tags={tags} />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Container>

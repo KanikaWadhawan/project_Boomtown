@@ -6,10 +6,12 @@ const styles = theme => ({
     minHeight: "100vh",
     padding: theme.spacing(2),
     [theme.breakpoints.down("xs")]: {
-      padding: theme.spacing(2)
+      padding: theme.spacing(2),
+      paddingTop: theme.spacing(11)
     },
     [theme.breakpoints.up("sm")]: {
-      padding: theme.spacing(10)
+      padding: theme.spacing(10),
+      paddingTop: theme.spacing(18)
     }
   }
 });
