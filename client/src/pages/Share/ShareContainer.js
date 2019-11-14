@@ -7,7 +7,7 @@ import { ALL_TAGS_QUERY } from "../../apollo/queries";
 class ShareContainer extends Component {
   render() {
     return (
-      <Query query={ALL_TAGS_QUERY} variables={{ filter: 1 }}>
+      <Query query={ALL_TAGS_QUERY}>
         {({ loading, error, data }) => {
           if (loading) return <FullScreenLoader />;
           if (error) return `Error: ${error}`;
