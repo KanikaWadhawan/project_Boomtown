@@ -14,6 +14,7 @@ import {
   AirportShuttle as AirportShuttleIcon,
   Album as AlbumIcon
 } from "@material-ui/icons";
+import PropTypes from "prop-types";
 
 class ShareForm extends Component {
   constructor(props) {
@@ -232,5 +233,11 @@ class ShareForm extends Component {
     );
   }
 }
+
+ShareForm.propTypes = {
+  tags: PropTypes.array.isRequired,
+
+  tags: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default withStyles(styles)(ShareForm);

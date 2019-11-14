@@ -15,6 +15,7 @@ import styles from "./styles";
 
 import ProfileImg from "../../images/doggy.png";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const ItemCard = ({ classes, itemInfo }) => {
   const defaultItemInfo = {
@@ -88,4 +89,27 @@ const ItemCard = ({ classes, itemInfo }) => {
   );
 };
 
+ItemCard.propTypes = {
+  itemInfo: PropTypes.object,
+  viewer: PropTypes.object,
+
+  itemInfo: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    imageurl: PropTypes.string,
+    tags: PropTypes.array,
+    itemowner: PropTypes.object,
+    borrower: PropTypes.object,
+    created: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  }),
+
+  viewer: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    fullname: PropTypes.string.isRequired,
+    imageurl: PropTypes.string,
+    bio: PropTypes.string
+  })
+};
 export default withStyles(styles)(ItemCard);
