@@ -13,6 +13,7 @@ import { ItemsGrid } from "../../components";
 import styles from "./styles";
 
 import ProfileImg from "../../images/doggy.png";
+import PropTypes from "prop-types";
 
 const Profile = ({ classes, userInfo }) => {
   return (
@@ -69,6 +70,17 @@ const Profile = ({ classes, userInfo }) => {
   );
 };
 
+Profile.propTypes = {
+  fullname: PropTypes.string,
+  bio: PropTypes.string,
+  email: PropTypes.string,
+  userimageurl: PropTypes.string,
+  items: PropTypes.array,
+  borrowed: PropTypes.array,
+
+  items: PropTypes.arrayOf(PropTypes.object),
+  borrowed: PropTypes.arrayOf(PropTypes.object)
+};
 const ProfileItems = ({ classes, items, title }) => (
   <Fragment>
     <Grid container>
