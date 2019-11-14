@@ -13,7 +13,7 @@ yarn install
 ### Run
 
 ```bash
-yarn start: dev
+yarn start:dev
 ```
 
 ## Client
@@ -55,6 +55,16 @@ yarn run build
 ![Preview](_snapshots/data_model.png)
 
 It represents the actual design blueprint of a relational database and how data should be structured and related in a specific DBMS.
+
+## Preview of the Boomtown App
+
+![Welcome Page](_snapshots/welcome-page.png)
+
+![Items Page](_snapshots/items-page.png)
+
+![Share Page](_snapshots/shares-page.png)
+
+![Profile Page](_snapshots/profile-page.png)
 
 ## Personal Learnings
 
@@ -329,13 +339,3 @@ class App extends Component {
 ### Material-UI
 
 Material-UI components work in isolation. They are self-supporting, and will only inject the styles they need to display. They don't rely on any global style-sheets such as normalize.css.
-
-### Preview of the Boomtown App
-
-![Welcome Page](_snapshots/welcome-page.png)
-
-![Items Page](_snapshots/items-page.png)
-
-![Share Page](_snapshots/shares-page.png)
-
-![Profile Page](_snapshots/profile-page.png)
