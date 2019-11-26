@@ -28,7 +28,7 @@ const SimpleMenu = ({ LOGOUT_MUTATION }) => {
     setAnchorEl(null);
   };
 
-  const logout = () => {};
+  // const logout = () => {};
 
   return (
     <Fragment>

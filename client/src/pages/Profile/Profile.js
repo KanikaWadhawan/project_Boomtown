@@ -75,8 +75,8 @@ Profile.propTypes = {
   bio: PropTypes.string,
   email: PropTypes.string,
   userimageurl: PropTypes.string,
-  items: PropTypes.array,
-  borrowed: PropTypes.array,
+  // items: PropTypes.array,
+  // borrowed: PropTypes.array,
 
   items: PropTypes.arrayOf(PropTypes.object),
   borrowed: PropTypes.arrayOf(PropTypes.object)

@@ -235,7 +235,7 @@ class ShareForm extends Component {
 }
 
 ShareForm.propTypes = {
-  tags: PropTypes.array.isRequired,
+  // tags: PropTypes.array.isRequired,
 
   tags: PropTypes.arrayOf(PropTypes.object).isRequired
 };

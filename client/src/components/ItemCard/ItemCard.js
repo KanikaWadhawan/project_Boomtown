@@ -90,9 +90,6 @@ const ItemCard = ({ classes, itemInfo }) => {
 };
 
 ItemCard.propTypes = {
-  itemInfo: PropTypes.object,
-  viewer: PropTypes.object,
-
   itemInfo: PropTypes.shape({
     id: PropTypes.string,
     title: PropTypes.string.isRequired,
