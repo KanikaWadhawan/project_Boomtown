@@ -7,6 +7,9 @@ const styles = theme => ({
   },
   card: {
     height: 500
+  },
+  avatar: {
+    borderRadius: "50%"
   }
 });
 

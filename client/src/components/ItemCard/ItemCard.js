@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Avatar,
   Card,
   CardActionArea,
   CardActions,
@@ -12,8 +11,8 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
+import Gravatar from "react-gravatar";
 
-import ProfileImg from "../../images/doggy.png";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -48,7 +47,13 @@ const ItemCard = ({ classes, itemInfo }) => {
       </CardActionArea>
 
       <CardHeader
-        avatar={<Avatar alt={info.itemowner.fullname} src={ProfileImg} />}
+        avatar={
+          <Gravatar
+            email={info.itemowner.email}
+            size={40}
+            className={classes.avatar}
+          />
+        }
         title={info.itemowner.fullname}
         subheader="October 20, 2019"
       />

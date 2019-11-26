@@ -28,6 +28,9 @@ const styles = theme => ({
   },
   gridProfileHeader: {
     marginTop: theme.spacing(6)
+  },
+  avatar: {
+    borderRadius: "50%"
   }
 });
 

@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import {
-  Avatar,
   Container,
   Card,
   CardHeader,
@@ -11,8 +10,7 @@ import {
 } from "@material-ui/core";
 import { ItemsGrid } from "../../components";
 import styles from "./styles";
-
-import ProfileImg from "../../images/doggy.png";
+import Gravatar from "react-gravatar";
 import PropTypes from "prop-types";
 
 const Profile = ({ classes, userInfo }) => {
@@ -27,7 +25,13 @@ const Profile = ({ classes, userInfo }) => {
           <Card className={classes.gridProfile}>
             <CardHeader
               className={classes.cardProfileContent}
-              avatar={<Avatar alt={userInfo.fullname} src={ProfileImg} />}
+              avatar={
+                <Gravatar
+                  email={userInfo.email}
+                  size={40}
+                  className={classes.avatar}
+                />
+              }
               title={
                 <Typography variant="h4" component="h2" color="textSecondary">
                   {userInfo.fullname}
@@ -75,8 +79,6 @@ Profile.propTypes = {
   bio: PropTypes.string,
   email: PropTypes.string,
   userimageurl: PropTypes.string,
-  // items: PropTypes.array,
-  // borrowed: PropTypes.array,
 
   items: PropTypes.arrayOf(PropTypes.object),
   borrowed: PropTypes.arrayOf(PropTypes.object)
