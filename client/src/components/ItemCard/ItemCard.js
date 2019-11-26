@@ -47,6 +47,8 @@ const ItemCard = ({ classes, itemInfo }) => {
       </CardActionArea>
 
       <CardHeader
+        component={Link}
+        to={`/profile/${info.itemowner.id}`}
         avatar={
           <Gravatar
             email={info.itemowner.email}

@@ -8,6 +8,7 @@ import { ViewerContext } from "../../context/ViewerProvider";
 class ProfileContainer extends Component {
   render() {
     const { match } = this.props;
+
     return (
       <ViewerContext.Consumer>
         {({ viewer }) => {
@@ -15,10 +16,7 @@ class ProfileContainer extends Component {
             <Query
               query={ALL_USER_ITEMS_QUERY}
               variables={{
-                id:
-                  match.path === "/profile/:userid"
-                    ? match.params.userid
-                    : viewer.id
+                id: match.params.id || viewer.id
               }}
               fetchPolicy="network-only"
             >
