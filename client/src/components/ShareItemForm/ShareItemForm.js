@@ -55,10 +55,10 @@ class ShareForm extends Component {
   saveItems = async (values, allTags, addItem) => {
     try {
       // new item
-      const newItem = {
-        ...values,
-        tags: this.applyTags(values.tags || [], allTags)
-      };
+      // const newItem = {
+      //   ...values,
+      //   tags: this.applyTags(values.tags || [], allTags)
+      // };
       // add item
       await addItem({
         variables: {
