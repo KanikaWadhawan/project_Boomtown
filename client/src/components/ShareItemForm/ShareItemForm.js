@@ -54,12 +54,6 @@ class ShareForm extends Component {
 
   saveItems = async (values, allTags, addItem) => {
     try {
-      // new item
-      // const newItem = {
-      //   ...values,
-      //   tags: this.applyTags(values.tags || [], allTags)
-      // };
-      // add item
       await addItem({
         variables: {
           title: values.title,
@@ -74,9 +68,7 @@ class ShareForm extends Component {
   };
 
   render() {
-    // this tags are alltags coming from the server
     const { classes, tags } = this.props;
-    // console.log(tags);
 
     return (
       <ItemPreviewContext.Consumer>
